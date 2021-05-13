@@ -20,6 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        http
                .csrf().disable()
                .authorizeRequests()
+               .mvcMatchers(HttpMethod.GET, "/api/products")
+                   .hasAuthority("SCOPE_read:products")
+               .mvcMatchers(HttpMethod.POST, "/api/products")
+                   .hasAuthority("SCOPE_create:products")
                .anyRequest()
                .authenticated();
                
